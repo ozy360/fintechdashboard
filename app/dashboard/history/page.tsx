@@ -6,12 +6,28 @@ import GridContainer from "@/app/components/gridContainer";
 import SectionContainer from "@/app/components/sectionContainer";
 import { Text, Select, Button, Loader } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
+import { CSVLink } from "react-csv";
 
 export default function History() {
   const { data, error, dataLoading } = useData();
 
   const options: string[] = ["All Types", "Sent", "Received", "Exchanged"];
   const [selectedType, setSelectedType] = useState<string | null>(options[0]);
+
+  const transactions: any = data?.transactions;
+  let transact;
+
+  if (selectedType === options[0]) {
+    transact = transactions;
+  } else if (selectedType === options[1]) {
+    transact = transactions.filter((tx: any) => tx.withdraw === true);
+  } else if (selectedType === options[2]) {
+    transact = transactions.filter((tx: any) => tx.deposit === true);
+  } else if (selectedType === options[3]) {
+    transact = transactions.filter(
+      (tx: any) => tx.deposit === true && tx.withdraw === true
+    );
+  }
 
   if (dataLoading)
     return (
@@ -26,9 +42,14 @@ export default function History() {
     <GridContainer>
       <SectionContainer heading="Transaction History" subheading="">
         <div className="flex mt-6">
-          <Button className="mr-2" leftSection={<IconDownload size={14} />}>
-            Export
-          </Button>
+          <CSVLink
+            filename={`${data?.username}_transaction _history.csv`}
+            data={transact}
+          >
+            <Button className="mr-2" leftSection={<IconDownload size={14} />}>
+              Export
+            </Button>
+          </CSVLink>
           <Select
             data={options}
             value={selectedType}
@@ -37,18 +58,18 @@ export default function History() {
           />
         </div>
         <div className="border-gray-200 border-t mt-6">
-          {!data?.transactions?.length ? (
+          {!transact.length ? (
             <div className="flex flex-col items-center justify-center py-20">
               <span>No transaction yet...</span>
             </div>
           ) : (
             <>
-              {data?.transactions
-                ?.map((x, index) => (
+              {transact
+                ?.map((x: any, index: number) => (
                   <div key={index}>
                     <div
                       className={`flex ${
-                        index === data?.transactions?.length - 1
+                        index === transact.length - 1
                           ? "border-gray-200 border-b"
                           : ""
                       } md:text-md items-center justify-between py-2 text-base`}

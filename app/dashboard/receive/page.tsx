@@ -76,11 +76,7 @@ export default function Receive() {
                     {x.text}
                   </Text>
 
-                  <Text
-                    c="dimmed"
-                    size="sm"
-                    // className={via === x.id ? "!text-gray-700" : ""}
-                  >
+                  <Text c="dimmed" size="sm">
                     {x.subtext}
                   </Text>
                 </div>

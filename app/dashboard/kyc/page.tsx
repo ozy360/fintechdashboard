@@ -5,8 +5,8 @@ import GridContainer from "@/app/components/gridContainer";
 import SectionContainer from "@/app/components/sectionContainer";
 import { useState } from "react";
 import { Button, Group, Card, Text, FileButton } from "@mantine/core";
-
 import { IconPhotoScan, IconUpload, IconCamera } from "@tabler/icons-react";
+import { toast, Toaster } from "sonner";
 
 export default function Kyc() {
   const router = useRouter();
@@ -15,7 +15,12 @@ export default function Kyc() {
   const [dname, setDname] = useState("Passport");
   const [step, setStep] = useState<number>(1);
 
-  const next = () => setStep((prev) => Math.min(prev + 1, 4));
+  const next = () => {
+    if (documentfile && selfiefile) setStep((prev) => Math.min(prev + 1, 4));
+    else if (!documentfile) toast.error(`Upload your ${dname}`);
+    else if (!selfiefile) toast.error(`Upload selfie`);
+    else toast.error(`Upload images`);
+  };
 
   // const back = () => setStep((prev) => Math.max(prev - 1, 1));
 
@@ -38,14 +43,11 @@ export default function Kyc() {
       label: "Selfie",
       value: selfiefile ? "Uploaded" : "Not Uploaded",
     },
-    {
-      label: "Status",
-      value: "Under Review",
-    },
   ];
 
   return (
     <GridContainer>
+      <Toaster position="top-center" richColors />
       <>
         {step === 1 && (
           <SectionContainer
@@ -179,6 +181,11 @@ export default function Kyc() {
                   <Text c="dimmed">{item.value}</Text>
                 </div>
               ))}
+
+              <div className="flex items-center justify-between space-y-2 py-2">
+                <span className="font-medium">Status:</span>
+                <span className="text-yellow-500">Under Review</span>
+              </div>
             </div>
             <div className="!bg-[#e7f5ff] !text-[#339af0] !font-medium !border !border-2 !border-[#339af0] mt-4 rounded-md p-4">
               <div className="font-semibold text-lg">What happens next?</div>

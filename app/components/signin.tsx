@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -82,7 +83,7 @@ export default function Signin() {
           onSubmit={form.onSubmit((values) => submitForm(values))}
         >
           <Card shadow="md" padding="lg" radius="md" withBorder>
-            <Title order={2} ta="left" mb="md">
+            <Title order={2} className="text-left" mb="lg">
               Login
             </Title>
             <TextInput
