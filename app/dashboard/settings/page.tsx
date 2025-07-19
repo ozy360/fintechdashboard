@@ -323,7 +323,7 @@ export default function Settings() {
   async function handlePassword() {
     const isPasswordValid = await bcrypt.compare(
       String(oldPassword),
-      data?.password
+      data?.password as string
     );
     if (isPasswordValid) {
       toast.error("Invalid old password");
