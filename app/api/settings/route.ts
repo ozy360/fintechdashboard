@@ -9,9 +9,14 @@ export async function POST(req: NextRequest) {
     const data = await req.formData();
     const cookie = await cookies();
     const id = cookie.get("usersessionId")?.value;
-    const profile = JSON.parse(data.get("profile"));
+    const rawProfile = data.get("profile");
+    if (!rawProfile) {
+      throw new Error("Profile data is missing");
+    }
 
-    const updateFields = {};
+    const profile = JSON.parse(rawProfile.toString());
+
+    const updateFields: Record<string, string> = {};
 
     if (profile.firstname) updateFields.firstname = profile.firstname;
     if (profile.lastname) updateFields.lastname = profile.lastname;
