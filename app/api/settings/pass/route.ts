@@ -11,12 +11,6 @@ export async function POST(req: NextRequest) {
     const cookie = await cookies();
     const id = cookie.get("usersessionId")?.value;
     const pass = String(data.get("password"));
-    // const user = await userdb.findOne({ _id: id });
-
-    // const isPasswordValid = await bcrypt.compare(pass, user?.password);
-
-    // if (!isPasswordValid)
-    //   return new Response(JSON.stringify({ error: "Invalid password" }));
 
     const hashedPassword = await bcrypt.hash(pass, 10);
 
