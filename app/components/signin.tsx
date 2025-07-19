@@ -83,6 +83,14 @@ export default function Signin() {
           onSubmit={form.onSubmit((values) => submitForm(values))}
         >
           <Card shadow="md" padding="lg" radius="md" withBorder>
+            <p>
+              <span className="font-medium">Email: </span>
+              {process.env.NEXT_PUBLIC_EMAIL}
+            </p>
+            <p>
+              <span className="font-medium">Password: </span>
+              {process.env.NEXT_PUBLIC_PASSWORD}
+            </p>
             <Title order={2} className="text-left" mb="lg">
               Login
             </Title>
