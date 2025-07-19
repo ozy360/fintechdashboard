@@ -64,7 +64,7 @@ const Nav = () => {
   return (
     <>
       <nav className="relative">
-        <div className="ml-6 hidden lg:inline-block size-12 mb-4">
+        <div className="ml-6 hidden lg:inline-block size-12 mb-2">
           <Image src={"/logo.png"} width={100} height={100} alt="logo" />
         </div>
 
