@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import useData from "../components/useData";
 import {
   IconCurrencyNaira,
@@ -20,8 +21,10 @@ import { Card, Text, Button, Loader } from "@mantine/core";
 import { useState } from "react";
 
 export default function Dashboard() {
+  const router = useRouter();
   const { data, error, dataLoading } = useData();
   const [hideAmount, setHideAmount] = useState<boolean>(false);
+  const transactions: any = data?.transactions;
 
   if (dataLoading)
     return (
@@ -113,37 +116,37 @@ export default function Dashboard() {
   const actions = [
     {
       icon: <IconCircleArrowUpRight stroke={1.6} />,
-      color: "",
+      link: "/dashboard/send",
       maintext: "Send Money",
       subtext: "Transfer to another user",
     },
     {
       icon: <IconCircleArrowDownRight stroke={1.6} />,
-      color: "",
+      link: "/dashboard/receive",
       maintext: "Receive",
       subtext: "Via bank or exchange",
     },
     {
       icon: <IconExchange stroke={1.6} />,
-      color: "",
+      link: "/dashboard/exchnage",
       maintext: "Exchange",
       subtext: "Convert currencies",
     },
     {
       icon: <IconHistory stroke={1.6} />,
-      color: "",
+      link: "/dashboard/history",
       maintext: "History",
       subtext: "View all transactions",
     },
     {
       icon: <IconUserCheck stroke={1.6} />,
-      color: "",
+      link: "/dashboard/kyc",
       maintext: "KYC",
       subtext: "Verify your identity",
     },
     {
       icon: <IconCreditCard stroke={1.6} />,
-      color: "",
+      link: "/dashboard/",
       maintext: "Cards",
       subtext: "Manage virtual cards",
     },
@@ -230,6 +233,7 @@ export default function Dashboard() {
                 key={index}
                 className="gap-y-2 hover:cursor-pointer "
                 withBorder
+                onClick={() => router.push(x.link)}
               >
                 <Button
                   variant="light"
@@ -260,12 +264,12 @@ export default function Dashboard() {
               withBorder
             >
               <div>
-                {data?.transactions
-                  ?.map((x, index) => (
+                {transactions
+                  ?.map((x: any, index: number) => (
                     <div key={index}>
                       <div
                         className={`flex ${
-                          index === data?.transactions?.length - 1
+                          index === transactions?.length - 1
                             ? "border-gray-200 border-b"
                             : ""
                         } md:text-md items-center justify-between py-2 text-base`}

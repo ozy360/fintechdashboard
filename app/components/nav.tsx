@@ -9,9 +9,19 @@ import {
   IconExchange,
   IconUserCheck,
   IconSettings,
+  IconLogout,
 } from "@tabler/icons-react";
 import { NavLink } from "@mantine/core";
 import Image from "next/image";
+
+async function handleLogout() {
+  try {
+    await fetch("/api/logout");
+    window.location.href = "/";
+  } catch (error: any) {
+    console.log(error.message);
+  }
+}
 
 const Nav = () => {
   const dashboardLinks = [
@@ -67,6 +77,14 @@ const Nav = () => {
               linkname={link.linkname}
             />
           ))}
+          <div onClick={handleLogout}>
+            <Links
+              key={""}
+              path={""}
+              svg={<IconLogout stroke={1.6} />}
+              linkname={"Logout"}
+            />
+          </div>
         </div>
       </nav>
     </>
