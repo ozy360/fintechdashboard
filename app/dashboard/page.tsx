@@ -154,10 +154,12 @@ export default function Dashboard() {
 
   return (
     <GridContainer>
-      <div className="mb-8 text-2xl">Welcome, {data?.username || null} ✋!</div>
+      <div className="mb-8 text-2xl text-black">
+        Welcome, {data?.username || null} ✋!
+      </div>
       <div className="mb-4 flex justify-between items-center">
         {" "}
-        <Text fw={800} ta="left" size="xl">
+        <Text fw={800} ta="left" size="xl" c="black">
           Your wallets
         </Text>
         {hideAmount ? (
@@ -221,7 +223,7 @@ export default function Dashboard() {
         </>
         <>
           <div className="mb-4">
-            <Text fw={800} ta="left" size="xl">
+            <Text fw={800} ta="left" size="xl" c="black">
               Quick action
             </Text>
           </div>
@@ -253,7 +255,7 @@ export default function Dashboard() {
         <>
           <div>
             <div className="mb-4">
-              <Text fw={800} ta="left" size="xl">
+              <Text fw={800} ta="left" size="xl" c="black">
                 Transactions
               </Text>
             </div>

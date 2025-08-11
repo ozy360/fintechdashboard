@@ -32,7 +32,7 @@ export default function MobileLayout() {
           <Image src={"/logo.png"} width={50} height={50} alt="logo" />
         </div>
         <div
-          className="cursor-pointer text-secondary dark:text-muted-foreground"
+          className="cursor-pointer text-black"
           onClick={() => setOpen(!open)}
         >
           {open ? <IconX stroke={1.6} /> : <IconMenu stroke={1.6} />}

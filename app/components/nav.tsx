@@ -68,7 +68,7 @@ const Nav = () => {
           <Image src={"/logo.png"} width={100} height={100} alt="logo" />
         </div>
 
-        <div className="px-5 py-2 space-y-4">
+        <div className="px-5 py-2 space-y-4 text-black">
           {dashboardLinks.map((link) => (
             <Links
               key={link.path}

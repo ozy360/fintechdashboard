@@ -33,7 +33,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className={`${body.variable} antialiased`}>
-        <main className="2xl:mx-auto 2xl:max-w-7xl">
+        <main className="2xl:mx-auto 2xl:max-w-7xl bg-white">
           <MantineProvider>{children}</MantineProvider>
         </main>
       </body>
