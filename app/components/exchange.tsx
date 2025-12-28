@@ -17,9 +17,17 @@ export default function ExchangeMain() {
   useEffect(() => {
     const fetchData = async () => {
       const storedData = sessionStorage.getItem("currencyData");
-      if (storedData) {
-        setCurrData(JSON.parse(storedData));
-        return;
+      if (storedData && storedData !== "undefined") {
+        try {
+          setCurrData(JSON.parse(storedData));
+          return;
+        } catch (error) {
+          console.error("Error parsing stored currency data:", error);
+          sessionStorage.removeItem("currencyData");
+        }
+      } else if (storedData === "undefined") {
+        // The stored data is "undefined", which is invalid. Remove it.
+        sessionStorage.removeItem("currencyData");
       }
 
       try {
@@ -29,8 +37,13 @@ export default function ExchangeMain() {
         if (res.ok) {
           const cdata = await res.json();
           setCurrData(cdata.quotes);
-          // Store data in sessionStorage
-          sessionStorage.setItem("currencyData", JSON.stringify(cdata.quotes));
+          if (cdata.quotes) {
+            // Store data in sessionStorage
+            sessionStorage.setItem(
+              "currencyData",
+              JSON.stringify(cdata.quotes)
+            );
+          }
         }
       } catch (error) {
         console.log(error);
@@ -197,8 +210,13 @@ export default function ExchangeMain() {
   if (error) return (window.location.href = "/");
 
   function handleExchange() {
-    if (Number(amount) * Number(toRate) > Number(amount)) {
+    if (!amount || amount <= 0) {
+      toast.error("Please enter a valid amount to exchange.");
+      return;
+    }
+    if (Number(amount) > Number(fromAmount)) {
       toast.error("Amount is greater than available balance");
+      return;
     } else {
       route.push("/dashboard/");
     }
