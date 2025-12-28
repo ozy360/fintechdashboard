@@ -12,7 +12,6 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 import { NavLink } from "@mantine/core";
-import Image from "next/image";
 
 async function handleLogout() {
   try {

@@ -4,7 +4,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Nav from "./nav";
 import { IconMenu, IconX } from "@tabler/icons-react";
-import Image from "next/image";
 
 export default function MobileLayout() {
   const [open, setOpen] = useState(false);
