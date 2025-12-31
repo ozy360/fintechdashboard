@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import Nav from "./nav";
 import { IconMenu, IconX } from "@tabler/icons-react";
@@ -27,7 +27,9 @@ export default function MobileLayout() {
   return (
     <>
       <div className="bg-gray-100 border-b border-[#dee2e6] flex items-center justify-between px-4 py-2 lg:hidden">
-        <div className="lg:inline-block text-[30px]">💴</div>
+        <div className="lg:inline-block text-[30px]">
+          <Image src={"/logo.png"} width={40} height={40} alt="logo" />
+        </div>
         <div
           className="cursor-pointer text-black"
           onClick={() => setOpen(!open)}

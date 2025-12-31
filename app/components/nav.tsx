@@ -12,6 +12,7 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 import { NavLink } from "@mantine/core";
+import Image from "next/image";
 
 async function handleLogout() {
   try {
@@ -63,8 +64,8 @@ const Nav = () => {
   return (
     <>
       <nav className="relative">
-        <div className="ml-6 hidden lg:inline-block size-12 mb-8 text-[60px]">
-          💴
+        <div className="ml-6 hidden lg:inline-block mb-4">
+          <Image src={"/logo.png"} width={50} height={50} alt="logo" />
         </div>
 
         <div className="px-5 py-2 space-y-4 text-black">
